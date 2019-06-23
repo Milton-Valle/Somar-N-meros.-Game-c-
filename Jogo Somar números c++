@@ -1,0 +1,56 @@
+#include <iostream>
+#include <locale.h>
+#include <stdlib.h>
+#include <time.h>
+
+// FEITO POR MILTON VALLE
+
+using namespace std;
+
+bool jogo = true;
+int rand1, rand2, resposta, pontuacao, certo;
+
+int mostrarSoma (int num, int num2){
+	cout << "A soma é " << num << " + " << num2 << " ";
+	return num + num2;
+}
+
+void mostrarPontuacao(){
+	cout << "\nVOCÊ TEM: " << pontuacao << " pontos!\n";
+}
+
+void fim() {
+	if(pontuacao == 10) {
+		cout << "VOCÊ GANHOU!!!!";
+		jogo = false;
+	}
+}
+
+void fimDerrota() {
+	if(pontuacao == -10) {
+		cout << "VOCÊ PERDEU!!!!";
+		jogo = false;
+	}
+}
+	
+int main () {
+	setlocale(LC_ALL, "Portuguese");
+	srand ( time(NULL) );
+	
+	cout << "Acerte a soma para somar 10 pontos, erre para perder um ponto.\n";
+	
+	do{
+		rand1 = rand() % 100 +1;
+		rand2 = rand() % 100 +1;
+		certo = mostrarSoma(rand1, rand2);
+		cin >> resposta;
+		if (resposta == certo){
+			pontuacao++;
+		}else if (resposta != certo) {
+			pontuacao--;
+		}
+		mostrarPontuacao();
+		fim();
+		fimDerrota();
+	} while (jogo == true);
+}
